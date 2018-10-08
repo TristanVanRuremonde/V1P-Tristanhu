@@ -1,12 +1,14 @@
 import random
 import string
 import csv
+import datetime
 
 
 lstUniqueNumbers = []
 
 
 def uniqueNumber():
+    print('UniqueNumber')
     'genereert een uniek getal voor de gebruiker'
     uniekNummer = ''
     while True:
@@ -25,6 +27,7 @@ def uniqueNumber():
 
 
 def gebruikersInformatie():
+    print('Gebruikersinformatie')
     'vraagt gebruiker voor zijn/haar naam'
     voornaamUser = str(input(('Voornaam: ')))
     achternaamUser = str(input('Achternaam: '))
@@ -45,7 +48,6 @@ def gebruikersInformatie():
         else:
             print('Incorrect wachtwoord. Probeer het opnieuw')
 
-
     # formatting is moeilijk
     if tussenvoegselUser == '':
         naamUser = voornaamUser + ' ' + achternaamUser
@@ -53,11 +55,36 @@ def gebruikersInformatie():
         naamUser = voornaamUser + ' ' + tussenvoegselUser + ' ' + achternaamUser
         # callt de functie uniqueNumber voor een random string als uniek nummer
     gebruikersNummer = uniqueNumber()
-    with open('Gebruikersbestand.csv', 'w', newline = '') as CSV:
+    with open('Gebruikersbestand.csv', 'w', newline='') as CSV:
         writer = csv.writer(CSV, delimiter=';')
 
-        writer.writerow((gebruikersNummer, naamUser, wachtwoord))
+        writer.writerow((gebruikersNummer, naamUser, wachtwoord, ''))
 
 
+def fietsStallen():
+    print('fietsenstallen')
+    correcteGegevens = False
+    huidigeTijd = datetime.datetime.now()
+    opgegevenGebruikersnaam = str(input('Geef je unieke code: '))
+    opgegevenWachtwoord = str(input('Voer je wachtwoord in: '))
+    with open('Gebruikersbestand.csv', 'r') as CSV:
+        for o in CSV.readlines():
+            print(o.split(';')[0])
+            print(o.split(';')[2])
+            wachtwoord = o.split(';')[2]
+            if opgegevenGebruikersnaam == o.split(';')[0]:
+                if wachtwoord == opgegevenWachtwoord:
+                    print('Ingelogd')
+                    correcteGegevens = True
+            else:
+                print('Iets ging fout. Probeer het opnieuw')
+    with open('Stallingsbestand', 'w', newline='') as CSV:
+        writer = csv.writer(CSV, delimiter=';')
+
+        if correcteGegevens == True:
+            writer.writerow((opgegevenGebruikersnaam, huidigeTijd))
+
+
+print(uniqueNumber())
 gebruikersInformatie()
-print('Plak deze sticker op je fiets: ', uniqueNumber())
+fietsStallen()
