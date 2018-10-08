@@ -60,4 +60,4 @@ def gebruikersInformatie():
 
 
 gebruikersInformatie()
-print(uniqueNumber())
+print('Plak deze sticker op je fiets: ', uniqueNumber())
