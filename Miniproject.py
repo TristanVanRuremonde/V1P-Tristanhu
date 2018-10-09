@@ -71,9 +71,10 @@ def gebruikersInformatie():
         naamUser = voornaamUser + ' ' + tussenvoegselUser + ' ' + achternaamUser
         # callt de functie uniqueNumber voor een random string als uniek nummer
     gebruikersNummer = uniqueNumber()
-    with open('Gebruikersbestand.csv', 'w', newline='') as CSV:
-        writer = csv.writer(CSV, delimiter=';')
+    with open('Gebruikersbestand.csv', 'r+', newline='\n') as CSV:
 
+        writer = csv.writer(CSV, delimiter=';')
+        writer.writerow('\n')
         writer.writerow((gebruikersNummer, naamUser, wachtwoord, ''))
     print(gebruikersNummer)
 
@@ -99,7 +100,7 @@ def fietsStallen():
                     correcteGegevens = True
             else:
                 print('Iets ging fout. Probeer het opnieuw')
-    with open('Stallingsbestand', 'w', newline='') as CSV:
+    with open('Stallingsbestand', 'r+', newline='') as CSV:
         writer = csv.writer(CSV, delimiter=';')
 
         if correcteGegevens == True:
