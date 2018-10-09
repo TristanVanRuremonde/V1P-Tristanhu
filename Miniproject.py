@@ -75,6 +75,10 @@ def fietsStallen():
             if opgegevenGebruikersnaam == o.split(';')[0]:
                 if wachtwoord == opgegevenWachtwoord:
                     print('Ingelogd')
+
+                    #extra lijn toevoegen  dat zegt gestald = true of false
+                    #Waar gestald?
+
                     correcteGegevens = True
             else:
                 print('Iets ging fout. Probeer het opnieuw')
