@@ -9,7 +9,7 @@ lstUniqueNumbers = []
 
 def login():
     try:
-        loginkeuze = int(input("Wat wil je doen?: /n 1.Account aanmaken /n 2. Fiets stallen /n 3. fiets ophalen /n 4. informatie opvragen"))
+        loginkeuze = int(input("Wat wil je doen?: \n 1.Account aanmaken \n 2. Fiets stallen \n 3. fiets ophalen \n 4. informatie opvragen \n Keuze: "))
         if loginkeuze == 1:
             gebruikersInformatie()
         elif loginkeuze == 2:
@@ -18,9 +18,10 @@ def login():
             print('3')
         elif loginkeuze == 4:
             print('4')
-        print('Error login')
+        else:
+            print('Error login')
     except ValueError:
-        print("Graar een cijfer invullen")
+        print("Graag een cijfer invullen")
 
 def uniqueNumber():
     print('UniqueNumber')
@@ -74,6 +75,7 @@ def gebruikersInformatie():
         writer = csv.writer(CSV, delimiter=';')
 
         writer.writerow((gebruikersNummer, naamUser, wachtwoord, ''))
+    print(gebruikersNummer)
 
 
 def fietsStallen():
@@ -103,7 +105,4 @@ def fietsStallen():
         if correcteGegevens == True:
             writer.writerow((opgegevenGebruikersnaam, huidigeTijd))
 
-
-print(uniqueNumber())
-gebruikersInformatie()
-fietsStallen()
+login()
