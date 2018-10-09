@@ -7,6 +7,21 @@ import datetime
 lstUniqueNumbers = []
 
 
+def login():
+    try:
+        loginkeuze = int(input("Wat wil je doen?: /n 1.Account aanmaken /n 2. Fiets stallen /n 3. fiets ophalen /n 4. informatie opvragen"))
+        if loginkeuze == 1:
+            gebruikersInformatie()
+        elif loginkeuze == 2:
+            print('2')
+        elif loginkeuze == 3:
+            print('3')
+        elif loginkeuze == 4:
+            print('4')
+        print('Error login')
+    except ValueError:
+        print("Graar een cijfer invullen")
+
 def uniqueNumber():
     print('UniqueNumber')
     'genereert een uniek getal voor de gebruiker'
