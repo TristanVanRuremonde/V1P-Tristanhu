@@ -7,21 +7,47 @@ import datetime
 lstUniqueNumbers = []
 
 
-def login():
+def login_menu():
     try:
-        loginkeuze = int(input("Wat wil je doen?: \n 1.Account aanmaken \n 2. Fiets stallen \n 3. fiets ophalen \n 4. informatie opvragen \n Keuze: "))
+        loginkeuze = int(input("Wat wil je doen?: \n 1.Inloggen \n 2. Registratie: "))
         if loginkeuze == 1:
-            gebruikersInformatie()
+            inloggen()
         elif loginkeuze == 2:
-            print('2')
-        elif loginkeuze == 3:
-            print('3')
-        elif loginkeuze == 4:
-            print('4')
+            gebruikersInformatie()
+
         else:
             print('Error login')
     except ValueError:
         print("Graag een cijfer invullen")
+
+def inloggen():
+    opgegevenGebruikersnaam = str(input('Geef je unieke code: '))
+    opgegevenWachtwoord = str(input('Voer je wachtwoord in: '))
+    with open('Gebruikersbestand.csv', 'r') as CSV:
+        for o in CSV.readlines():
+            print(o.split(';')[0])
+            print(o.split(';')[2])
+            wachtwoord = o.split(';')[2]
+            if opgegevenGebruikersnaam == o.split(';')[0]:
+                if wachtwoord == opgegevenWachtwoord:
+                    ingelogd()
+
+
+def ingelogd():
+    try:
+        loginkeuze = int(input("Wat wil je doen?: \n 1. Fiets stallen \n 2. fiets ophalen \n 3. informatie opvragen \n Keuze: "))
+        if loginkeuze == 1:
+            # extra keer inloggen verwijderen.
+            fietsStallen()
+        elif loginkeuze == 2:
+            gebruikersInformatie()
+        elif loginkeuze == 3:
+            print('3')
+        else:
+            print('Error login')
+    except ValueError:
+        print("Graag een cijfer invullen")
+
 
 def uniqueNumber():
     print('UniqueNumber')
@@ -71,11 +97,10 @@ def gebruikersInformatie():
         naamUser = voornaamUser + ' ' + tussenvoegselUser + ' ' + achternaamUser
         # callt de functie uniqueNumber voor een random string als uniek nummer
     gebruikersNummer = uniqueNumber()
-    with open('Gebruikersbestand.csv', 'r+', newline='\n') as CSV:
+    with open('Gebruikersbestand.csv', 'a', newline='\n') as CSV:
 
-        writer = csv.writer(CSV, delimiter=';')
-        writer.writerow('\n')
-        writer.writerow((gebruikersNummer, naamUser, wachtwoord, ''))
+        appender = csv.append(CSV, delimiter=';')
+        appender.writerow((gebruikersNummer, naamUser, wachtwoord, ''))
     print(gebruikersNummer)
 
 
@@ -92,7 +117,7 @@ def fietsStallen():
             wachtwoord = o.split(';')[2]
             if opgegevenGebruikersnaam == o.split(';')[0]:
                 if wachtwoord == opgegevenWachtwoord:
-                    print('Ingelogd')
+
 
                     #extra lijn toevoegen  dat zegt gestald = true of false
                     #Waar gestald?
@@ -106,4 +131,6 @@ def fietsStallen():
         if correcteGegevens == True:
             writer.writerow((opgegevenGebruikersnaam, huidigeTijd))
 
-login()
+
+
+login_menu()
