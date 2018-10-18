@@ -70,8 +70,8 @@ def uniqueNumber():
 def registreren():
     'vraagt gebruiker voor zijn/haar naam'
     voornaamUser = str(input('Voornaam: '))
-    achternaamUser = str(input('Achternaam: '))
     tussenvoegselUser = str(input('Tussenvoegsel [laat leeg indien je er geen hebt...]: '))
+    achternaamUser = str(input('Achternaam: '))
     while True:
         wachtwoordKoppel = str(input('Geef wachtwoord [min. 6 karakters met twee cijfers]: '))
         wachtwoord = ''
@@ -99,6 +99,9 @@ def registreren():
         writer = csv.writer(CSV, delimiter=';')
 
         writer.writerow((gebruikersNummer, naamUser, wachtwoord, ''))
+    print('Hier is je Unieke nummer: ', gebruikersNummer)
+    login_menu()
+
 def login():
     lstGebruikersGegevens = []
     with open('Gebruikersbestand.csv', 'r') as CSV:
