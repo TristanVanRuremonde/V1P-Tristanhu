@@ -25,8 +25,6 @@ def inloggen():
     opgegevenWachtwoord = str(input('Voer je wachtwoord in: '))
     with open('Gebruikersbestand.csv', 'r') as CSV:
         for o in CSV.readlines():
-            print(o.split(';')[0])
-            print(o.split(';')[2])
             wachtwoord = o.split(';')[2]
             if opgegevenGebruikersnaam == o.split(';')[0]:
                 if wachtwoord == opgegevenWachtwoord:
